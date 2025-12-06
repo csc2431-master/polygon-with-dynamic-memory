@@ -14,10 +14,13 @@ TEST_TARGET = $(EXEDIR)/polygon_test
 MAIN_SRC = main.cpp
 TEST_SRC = test.cpp
 POINT_SRC = point.cpp
+FTEST_SRC = file-test.cpp
+POLYGON_SRC = polygon.cpp
 
 # Object files
 MAIN_OBJ = $(BUILDDIR)/main.o
 TEST_OBJ = $(BUILDDIR)/test.o
+FTEST_OBJ = $(BUILDDIR)/file-test.o
 POINT_OBJ = $(BUILDDIR)/point.o
 POLYGON_OBJ = $(BUILDDIR)/polygon.o
 
@@ -30,6 +33,10 @@ $(TARGET): $(MAIN_OBJ) $(POINT_OBJ) $(POLYGON_OBJ) | $(EXEDIR)
 
 # Build the test program
 test: $(TEST_TARGET)
+
+# Build the File Test program
+ftest: $(FTEST_OBJ) $(POINT_OBJ) $(POLYGON_OBJ) | $(EXEDIR)
+	$(CXX) $(CXXFLAGS) -o $(EXEDIR)/file_test $(FTEST_OBJ) $(POINT_OBJ) $(POLYGON_OBJ)
 
 $(TEST_TARGET): $(TEST_OBJ) $(POINT_OBJ) $(POLYGON_OBJ) | $(EXEDIR)
 	$(CXX) $(CXXFLAGS) -o $(TEST_TARGET) $(TEST_OBJ) $(POINT_OBJ) $(POLYGON_OBJ)
