@@ -26,16 +26,11 @@ A → B → C
 ```
 
 Compute the 2D cross product:
-
-\[
-\vec{AB} = B - A
-\]
-\[
-\vec{BC} = C - B
-\]
-\[
+$$
+\vec{AB} = B - A \\
+\vec{BC} = C - B \\
 \text{cross}(A,B,C) = AB_x \cdot BC_y - AB_y \cdot BC_x
-\]
+$$
 
 The sign of the result determines the turn direction:
 
