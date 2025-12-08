@@ -4,6 +4,7 @@
 
 int main(int argc, char* argv[])
 {
+    std::cout << sizeof(Point) << "\n";
     std::cout << "=== Testing Point ===\n";
     Point p1(0.0, 0.0);
     Point p2(3.0, 4.0);

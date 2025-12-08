@@ -87,6 +87,12 @@ Why use `Point**`?
 
 This is excellent for educational purposes, even though in modern C++ you might prefer `std::vector<Point>` or smart pointers.
 
+### `Point**` in Action
+
+![Array of Pointers to Point*](images/dynmem-rev.gif)
+
+The animation above shows how the constructor of class `Polygon` is called and it creates an array to `Point*`. After this, it shows what happens when four points are added using the `AddPoint(const Point&)` method.
+
 ---
 
 ## 4. Building With `make`
@@ -138,16 +144,7 @@ This flowchart shows the logical steps used to determine whether a polygon is co
 by examining the sign of cross products around the polygon.
 ![Convexity Algorithm Flowchart](images/convexity_flowchart.png)
 
-### 5.4 UML Class Diagram
-The UML diagram below shows the relationship between the `Point` and `Polygon` classes.
-![UML Class Diagram](images/uml_point_polygon.png)
 
-
-Below is an illustration of convex vs. concave polygons:
-
-![Convex vs Concave Polygons](images/convex_vs_concave.png)
-
----
 
 ## 6. File Structure
 
