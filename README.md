@@ -26,6 +26,7 @@ A → B → C
 ```
 
 Compute the 2D cross product:
+
 $$
 \vec{AB} = B - A \\
 \vec{BC} = C - B \\
