@@ -33,7 +33,6 @@ $$
 \vec{BC} = C - B \\
 
 \text{cross}(A,B,C) = AB_x \cdot BC_y - AB_y \cdot BC_x
-
 $$
 
 The sign of the result determines the turn direction:
