@@ -180,3 +180,23 @@ It is a well‑structured foundation for teaching geometry, C++ objects, and alg
 
 ---
 
+## Our task
+
+This repository is part of an activity to refresh previous courses concepts and to setup the development environment for the Data Structures and Algorithms class.
+
+The activity's tasks are:
+1. Install the necessary software: GitHub desktop, Visual Studio Code, Ubuntu (for Mac using Docker, for Windows using WSL).
+2. Practice using the command line. (cd, mkdir, rm, ls, cat, pwd)
+3. Setup command line tools: gh
+4. Setup IDE: Visual Studio Code with Ubuntu
+5. Work on the Polygon project to test the Development Environment
+6. Modify the Polygon project
+
+## Polygon Modification
+
+You will add a new method to the class `Polygon`. The method declaration is as follows:
+```c++
+bool InsertPoint(const Point& point, int position);
+```
+This method will **insert* the point `point` into the position `position` **even** if the `\_points` array is full. This will effectively change the polygon adding an additional vertext to it. Suppose you had already created a polygon with four points `a`, `b`, `c` and `d` and then you call the method `InsertPoint` with point x and position `2`. Your polygon would be now a polygon with the following points `a`, `b`, `x`, `c`, and `d`. So, despite having an original capacity of `4` when `InsertPoint` is called it will _modify_ the array expanding it's capacity and moving the pointers to their appropriate locations.
+
