@@ -185,7 +185,7 @@ It is a well‑structured foundation for teaching geometry, C++ objects, and alg
 This repository is part of an activity to refresh previous courses concepts and to setup the development environment for the Data Structures and Algorithms class.
 
 The activity's tasks are:
-1. Install the necessary software: GitHub desktop, Visual Studio Code, Ubuntu (for Mac using Docker, for Windows using WSL).
+1. Install the necessary software: GitHub desktop, Visual Studio Code, Docker for Mac users, and WSL2 for Windows users.
 2. Practice using the command line. (cd, mkdir, rm, ls, cat, pwd)
 3. Setup command line tools: gh
 4. Setup IDE: Visual Studio Code with Ubuntu
@@ -194,9 +194,64 @@ The activity's tasks are:
 
 ## Polygon Modification
 
-You will add a new method to the class `Polygon`. The method declaration is as follows:
-```c++
-bool InsertPoint(const Point& point, int position);
-```
-This method will **insert* the point `point` into the position `position` **even** if the `\_points` array is full. This will effectively change the polygon adding an additional vertext to it. Suppose you had already created a polygon with four points `a`, `b`, `c` and `d` and then you call the method `InsertPoint` with point x and position `2`. Your polygon would be now a polygon with the following points `a`, `b`, `x`, `c`, and `d`. So, despite having an original capacity of `4` when `InsertPoint` is called it will _modify_ the array expanding it's capacity and moving the pointers to their appropriate locations.
+You will implement a new method for the class `Polygon`. This method will receive a `Point` as parameter and will determine if the point is in, on, our outside the Polygon.
 
+![Inside, on, outside Polygon](images/in-on-out.png)
+
+The image above shows a seven point convex polygon. The blue dot is a point inside the polygon, the yellow dot is a point on (an edge) the polygon, and the green dot is outside the polygon. 
+
+The method declaration is:
+```c++
+PointLocation LocatePoint(const Point& point) const;
+```
+
+The method will return:
+* `PointLocation::Outside` if `point` is located outside of `this`
+* `PointLocation::OnEdge` if `point` is located on any of the edges of `this`, in other words if it's on any of the lines that make up the polygon.
+* `PointLocation::Inside` if the `point` is located inside `this`
+
+You may assume that this method is only going to be called when the polygon is convex, but you are wellcome to code a more generalized algorithm.
+
+## Polygon Modification (Extra Credit)
+
+Implement an additional method to export the polygon to an SVG file. SVG is an image file format that does not require you to use any additional libraries. It is basically a text file that describes the image that it contains. SVG stands for Scalable Vector Graphics.
+
+Below you can see an SVG file that represents
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="100"
+    height="100"
+    viewBox="0 0 100 100">
+
+    <!-- Background -->
+    <rect x="0" y="0" width="100" height="100" fill="white"/>
+
+    <!-- Equilateral triangle -->
+    <!-- Vertices: (50,10), (10,80), (90,80) -->
+    <polygon
+        points="50,10 10,80 90,80"
+        fill="none"
+        stroke="blue"
+        stroke-width="2"/>
+
+    <!-- Inscribed circle -->
+    <!-- Center at centroid (50,56.67), radius ≈ 23 -->
+    <circle
+        cx="50"
+        cy="56.67"
+        r="23"
+        fill="none"
+        stroke="blue"
+        stroke-width="2"/>
+
+</svg>
+```
+
+The text above represents the following image:
+
+![Triangle and Circle](images/sample.svg)
+
+Your mission is to research a little bit more about how to "draw" the polygon into an SVG file. Use AI **only** to understand how SVG works, **not** to get the code!
