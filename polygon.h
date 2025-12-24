@@ -3,6 +3,14 @@
 
 #include <string>
 #include "point.h"
+using std::string;
+enum class PointLocation
+{
+    Invalid = -1,
+    Inside,
+    Outside,
+    OnEdge
+};
 
 /**
  * @class Polygon
@@ -113,6 +121,30 @@ public:
      * @return A string describing the polygon.
      */
     std::string ToString() const;
+
+    /**
+     * @brief Determines the location of a point relative to the polygon.
+     *
+     * In here you will describe the algorithm you used to implement this method.
+     *
+     * @param point The point to test.
+     * @return PointLocation::Inside if the point is inside the polygon,
+     *         PointLocation::Outside if outside, and
+     *         PointLocation::OnEdge if on the edge.
+     */
+    PointLocation LocatePoint(const Point& point) const;
+    /**
+     * @brief Exports the polygon to an SVG file.
+     *
+     * The SVG file will contain a visual representation of the polygon
+     * within a canvas of the specified width and height.
+     *
+     * @param filename The name of the SVG file to create.
+     * @param width The width of the SVG canvas.
+     * @param height The height of the SVG canvas.
+     * @return true if the export was successful, false otherwise.
+     */
+    bool ExportToSVG(const string& filename, int width, int height) const;
 };
 
-#endif
+#endif // POLYGON_H

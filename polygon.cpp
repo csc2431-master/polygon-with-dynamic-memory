@@ -156,3 +156,10 @@ std::string Polygon::ToString() const
     }
     return oss.str();
 }
+
+PointLocation Polygon::LocatePoint(const Point& point) const{
+    return PointLocation::Invalid;
+}
+bool Polygon::ExportToSVG(const string& filename, int width, int height) const{
+    return false;
+}

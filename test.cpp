@@ -144,6 +144,76 @@ void TestPolygonCopyAndAssign(TestStats& stats) {
     ASSERT_TRUE("Assign: IsConvex matches",
                 assigned.IsConvex() == base.IsConvex(), stats);
 }
+void TestPolygonLocatePoint(TestStats& stats) {
+    std::cout << "Running TestPolygonLocatePoint...\n";
+
+    // ---------------------------
+    // Polygon #1: Unit square
+    // (0,0) -> (2,0) -> (2,2) -> (0,2)
+    // ---------------------------
+    Polygon square(4);
+    bool addOk1 = true;
+    addOk1 = addOk1 && square.AddPoint(Point(0.0, 0.0));
+    addOk1 = addOk1 && square.AddPoint(Point(2.0, 0.0));
+    addOk1 = addOk1 && square.AddPoint(Point(2.0, 2.0));
+    addOk1 = addOk1 && square.AddPoint(Point(0.0, 2.0));
+    // ASSERT_TRUE("LocatePoint setup: square AddPoint ok", addOk1, stats);
+
+    // Inside (2 tests)
+    ASSERT_TRUE("LocatePoint square inside #1",
+                square.LocatePoint(Point(1.0, 1.0)) == PointLocation::Inside, stats);
+    ASSERT_TRUE("LocatePoint square inside #2",
+                square.LocatePoint(Point(0.25, 1.75)) == PointLocation::Inside, stats);
+
+    // Outside (2 tests)
+    ASSERT_TRUE("LocatePoint square outside #1",
+                square.LocatePoint(Point(3.0, 1.0)) == PointLocation::Outside, stats);
+    ASSERT_TRUE("LocatePoint square outside #2",
+                square.LocatePoint(Point(-0.5, -0.5)) == PointLocation::Outside, stats);
+
+    // On edge (2 tests)
+    ASSERT_TRUE("LocatePoint square on-edge #1 (bottom edge)",
+                square.LocatePoint(Point(1.0, 0.0)) == PointLocation::OnEdge, stats);
+    ASSERT_TRUE("LocatePoint square on-edge #2 (left edge)",
+                square.LocatePoint(Point(0.0, 1.0)) == PointLocation::OnEdge, stats);
+
+
+    // ---------------------------
+    // Polygon #2: Convex pentagon (non-regular)
+    // (0,0) -> (3,0) -> (4,2) -> (2,4) -> (-1,2)
+    // ---------------------------
+    Polygon pentagon(5);
+    bool addOk2 = true;
+    addOk2 = addOk2 && pentagon.AddPoint(Point(0.0, 0.0));
+    addOk2 = addOk2 && pentagon.AddPoint(Point(3.0, 0.0));
+    addOk2 = addOk2 && pentagon.AddPoint(Point(4.0, 2.0));
+    addOk2 = addOk2 && pentagon.AddPoint(Point(2.0, 4.0));
+    addOk2 = addOk2 && pentagon.AddPoint(Point(-1.0, 2.0));
+    // ASSERT_TRUE("LocatePoint setup: pentagon AddPoint ok", addOk2, stats);
+
+    // (Optional sanity) ensure convex as intended
+    // ASSERT_TRUE("LocatePoint setup: pentagon IsConvex == true", pent.IsConvex(), stats);
+
+    // Inside (2 tests)
+    ASSERT_TRUE("LocatePoint pentagon inside #1",
+                pentagon.LocatePoint(Point(2.0, 2.0)) == PointLocation::Inside, stats);
+    ASSERT_TRUE("LocatePoint pentagon inside #2",
+                pentagon.LocatePoint(Point(1.0, 1.0)) == PointLocation::Inside, stats);
+
+    // Outside (2 tests)
+    ASSERT_TRUE("LocatePoint pentagon outside #1",
+                pentagon.LocatePoint(Point(5.0, 2.0)) == PointLocation::Outside, stats);
+    ASSERT_TRUE("LocatePoint pentagon outside #2",
+                pentagon.LocatePoint(Point(-2.0, 3.0)) == PointLocation::Outside, stats);
+
+    // On edge (2 tests)
+    // On edge between (0,0) and (3,0)
+    ASSERT_TRUE("LocatePoint pentagon on-edge #1 (bottom edge)",
+                pentagon.LocatePoint(Point(2.0, 0.0)) == PointLocation::OnEdge, stats);
+    // On edge between (4,2) and (2,4): midpoint (3,3)
+    ASSERT_TRUE("LocatePoint pentagon on-edge #2 (diagonal edge midpoint)",
+                pentagon.LocatePoint(Point(3.0, 3.0)) == PointLocation::OnEdge, stats);
+}
 
 
 // ----------------- main -----------------
@@ -155,6 +225,7 @@ int main() {
     TestPolygonSquareConvex(stats);
     TestPolygonConcave(stats);
     TestPolygonCopyAndAssign(stats);
+    TestPolygonLocatePoint(stats);    
 
     std::cout << "\n=== TEST SUMMARY ===\n";
     std::cout << "Passed: " << stats.passed << "\n";
