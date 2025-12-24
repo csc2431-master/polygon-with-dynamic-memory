@@ -158,9 +158,10 @@ by examining the sign of cross products around the polygon.
 ├── polygon.h
 ├── polygon.cpp
 ├── test.cpp
-├── main_file_tests.cpp
+├── file_tests.cpp
+├── main.cpp
 ├── polygons.txt
-├── Makefile
+├── makefile
 └── README.md
 ```
 
@@ -194,11 +195,11 @@ The activity's tasks are:
 
 ## Polygon Modification
 
-You will implement a new method for the class `Polygon`. This method will receive a `Point` as parameter and will determine if the point is in, on, our outside the Polygon.
+You will implement a new method for the class `Polygon`. This method will receive a `Point` as parameter and will determine if the point is in, on, or outside the Polygon.
 
 ![Inside, on, outside Polygon](images/in-on-out.png)
 
-The image above shows a seven point convex polygon. The blue dot is a point inside the polygon, the yellow dot is a point on (an edge) the polygon, and the green dot is outside the polygon. 
+The image above shows a seven point polygon. The blue dot is a point inside the polygon, the yellow dot is a point on (an edge) the polygon, and the green dot is outside the polygon. 
 
 The method declaration is:
 ```c++
